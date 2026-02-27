@@ -4,7 +4,7 @@ const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://
 const POLL_INTERVAL_MS = 25000;
 const DEFAULT_AGENT_BANNER = '/images/banners/default/OpenClaw-2026.2.23-Released.jpg';
 const SOLANA_CONTRACT_ADDRESS =
-  import.meta.env.VITE_SOLANA_CONTRACT_ADDRESS || 'So11111111111111111111111111111111111111112';
+  import.meta.env.VITE_SOLANA_CONTRACT_ADDRESS || 'Ge7M1FJGSvE5D6mj9HQ2jJUUEKDysnuucPP5kihopump';
 const SOLANA_PRICE_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd';
 
 const PAGE_TITLES = {
@@ -1632,7 +1632,7 @@ on API error:
                 <path d="M12 .8A11.2 11.2 0 0 0 .8 12a11.2 11.2 0 0 0 7.7 10.6c.6.1.8-.3.8-.6v-2.2c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.8.8 2.2 1.5.1-.7.4-1.2.8-1.4-2.5-.3-5.1-1.3-5.1-5.6 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 .1a10.3 10.3 0 0 1 5.4 0c2.1-.4 3-.1 3-.1.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.3-2.6 5.3-5.1 5.6.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A11.2 11.2 0 0 0 23.2 12 11.2 11.2 0 0 0 12 .8z" />
               </svg>
             </a>
-            <a className="social-link social-link-pump" href="https://clawxai.live/" target="_blank" rel="noreferrer" aria-label="clawxai.live">
+            <a className="social-link social-link-pump" href="https://pump.fun/coin/Ge7M1FJGSvE5D6mj9HQ2jJUUEKDysnuucPP5kihopump" target="_blank" rel="noreferrer" aria-label="pump.fun">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 4h1.8v14.2H20V20H4z" />
                 <path d="M7.2 15.2 10.5 11l2.6 2.1 3.8-5.1 1.4 1.1-5 6.7-2.6-2.1-2.1 2.6z" />
@@ -2981,7 +2981,7 @@ on API error:
               <path d="M12 .8A11.2 11.2 0 0 0 .8 12a11.2 11.2 0 0 0 7.7 10.6c.6.1.8-.3.8-.6v-2.2c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.8.8 2.2 1.5.1-.7.4-1.2.8-1.4-2.5-.3-5.1-1.3-5.1-5.6 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 .1a10.3 10.3 0 0 1 5.4 0c2.1-.4 3-.1 3-.1.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.3-2.6 5.3-5.1 5.6.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A11.2 11.2 0 0 0 23.2 12 11.2 11.2 0 0 0 12 .8z" />
             </svg>
           </a>
-          <a className="mobile-social-link" href="https://clawxai.live/" target="_blank" rel="noreferrer" aria-label="clawxai.live">
+          <a className="mobile-social-link" href="https://pump.fun/coin/Ge7M1FJGSvE5D6mj9HQ2jJUUEKDysnuucPP5kihopump" target="_blank" rel="noreferrer" aria-label="pump.fun">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M4 4h1.8v14.2H20V20H4z" />
               <path d="M7.2 15.2 10.5 11l2.6 2.1 3.8-5.1 1.4 1.1-5 6.7-2.6-2.1-2.1 2.6z" />
