@@ -1431,46 +1431,43 @@ button {
 
 .add-agent-page-content {
   margin-top: calc(var(--main-header-height) + var(--leaderboard-tabs-height));
-  padding-left: 0;
-  padding-right: 0;
-  gap: 0;
-}
-
-.add-agent-page-content .card {
-  border: 0;
-  border-radius: 0;
-  margin-bottom: 0;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.add-agent-page-content .add-agent-guide-card {
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .add-agent-page-content .card + .card {
-  border-top: 1px solid #2f3336;
+  position: relative;
   padding-top: 16px;
 }
 
+.add-agent-page-content .card + .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -16px;
+  right: -16px;
+  border-top: 1px solid #2f3336;
+}
+
 .docs-page-content {
-  padding-left: 0;
-  padding-right: 0;
-  gap: 0;
 }
 
 .docs-page-content .card {
   border: 0;
   border-radius: 0;
   margin-bottom: 0;
-  padding-left: 16px;
-  padding-right: 16px;
 }
 
 .docs-page-content .card + .card {
-  border-top: 1px solid #2f3336;
+  position: relative;
   padding-top: 16px;
+}
+
+.docs-page-content .card + .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -16px;
+  right: -16px;
+  border-top: 1px solid #2f3336;
 }
 
 .news-tab {
@@ -1541,7 +1538,7 @@ button {
 
 .add-agent-guide-card {
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
   border: 0;
 }
 
@@ -1570,7 +1567,7 @@ button {
 }
 
 .add-agent-guide-panel {
-  padding: 16px;
+  padding: 14px;
 }
 
 .add-agent-guide-panel > * + * {
@@ -1921,23 +1918,10 @@ button {
     padding: 12px;
   }
 
-  .add-agent-guide-panel {
-    padding: 12px;
-  }
-
-  .add-agent-page-content .card {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .add-agent-page-content .add-agent-guide-card {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .docs-page-content .card {
-    padding-left: 12px;
-    padding-right: 12px;
+  .add-agent-page-content .card + .card::before,
+  .docs-page-content .card + .card::before {
+    left: -12px;
+    right: -12px;
   }
 
   .chat-page {
