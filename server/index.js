@@ -39,6 +39,7 @@ const memory = {
   nextCommentId: 1,
   chatMessages: [],
   nextChatId: 1,
+  pageViews: [],
 };
 
 const nowIso = () => new Date().toISOString();
@@ -209,6 +210,19 @@ async function initSchema() {
       created_at TIMESTAMP DEFAULT NOW()
     )
   `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS analytics_pageviews (
+      id BIGSERIAL PRIMARY KEY,
+      page TEXT NOT NULL,
+      path TEXT NOT NULL,
+      referrer TEXT,
+      source TEXT DEFAULT 'spa',
+      user_agent TEXT,
+      ip_hash TEXT,
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `);
 }
 
 app.get('/health', async (req, res) => {
@@ -226,6 +240,86 @@ app.get('/health', async (req, res) => {
     status: 'ok',
     db,
     uptime: Math.floor(process.uptime()),
+  });
+});
+
+app.post('/api/analytics/pageview', async (req, res) => {
+  const page = String(req.body?.page || '').trim();
+  const pagePath = String(req.body?.path || '').trim() || '/';
+  const referrer = req.body?.referrer ? String(req.body.referrer).slice(0, 400) : null;
+  const source = req.body?.source ? String(req.body.source).slice(0, 40) : 'spa';
+  const userAgent = String(req.headers['user-agent'] || '').slice(0, 300);
+  const ipHash = String(req.ip || '').slice(0, 120);
+
+  if (!page) {
+    return res.status(400).json({ error: 'page is required' });
+  }
+
+  if (pool) {
+    try {
+      await pool.query(
+        `INSERT INTO analytics_pageviews (page, path, referrer, source, user_agent, ip_hash)
+         VALUES ($1, $2, $3, $4, $5, $6)`,
+        [page, pagePath, referrer, source, userAgent, ipHash]
+      );
+      return res.status(201).json({ ok: true });
+    } catch (error) {
+      return res.status(400).json({ error: 'Unable to track pageview', detail: error.message });
+    }
+  }
+
+  memory.pageViews.push({
+    id: memory.pageViews.length + 1,
+    page,
+    path: pagePath,
+    referrer,
+    source,
+    user_agent: userAgent,
+    ip_hash: ipHash,
+    created_at: nowIso(),
+  });
+
+  if (memory.pageViews.length > 2000) {
+    memory.pageViews.splice(0, memory.pageViews.length - 2000);
+  }
+
+  return res.status(201).json({ ok: true });
+});
+
+app.get('/api/analytics/summary', async (req, res) => {
+  if (pool) {
+    try {
+      const totalResult = await pool.query(`SELECT COUNT(*)::int AS total FROM analytics_pageviews`);
+      const topResult = await pool.query(
+        `SELECT page, COUNT(*)::int AS views
+         FROM analytics_pageviews
+         GROUP BY page
+         ORDER BY views DESC, page ASC
+         LIMIT 10`
+      );
+
+      return res.json({
+        total: totalResult.rows[0]?.total || 0,
+        topPages: topResult.rows,
+      });
+    } catch (error) {
+      return res.status(400).json({ error: 'Unable to fetch analytics summary', detail: error.message });
+    }
+  }
+
+  const counts = new Map();
+  for (const view of memory.pageViews) {
+    counts.set(view.page, (counts.get(view.page) || 0) + 1);
+  }
+
+  const topPages = Array.from(counts.entries())
+    .map(([page, views]) => ({ page, views }))
+    .sort((a, b) => b.views - a.views || a.page.localeCompare(b.page))
+    .slice(0, 10);
+
+  return res.json({
+    total: memory.pageViews.length,
+    topPages,
   });
 });
 

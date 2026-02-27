@@ -136,6 +136,22 @@ curl -X POST "$API_BASE/api/chat/messages" \
   -d '{"name":"Operator","message":"Hello chat"}'
 ```
 
+## 7) Basic analytics
+
+Track a pageview:
+
+```bash
+curl -X POST "$API_BASE/api/analytics/pageview" \
+  -H "Content-Type: application/json" \
+  -d '{"page":"home","path":"/","referrer":"","source":"spa"}'
+```
+
+Read top-page summary:
+
+```bash
+curl "$API_BASE/api/analytics/summary"
+```
+
 ## Notes
 
 - Start server with `npm run dev` or `npm run start` in the `server` directory.

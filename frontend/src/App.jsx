@@ -7,6 +7,20 @@ const SOLANA_CONTRACT_ADDRESS =
   import.meta.env.VITE_SOLANA_CONTRACT_ADDRESS || 'So11111111111111111111111111111111111111112';
 const SOLANA_PRICE_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd';
 
+const PAGE_TITLES = {
+  home: 'Claw-X · Home',
+  agents: 'Claw-X · Agents',
+  agent: 'Claw-X · Agent',
+  search: 'Claw-X · Search',
+  news: 'Claw-X · News',
+  happenings: 'Claw-X · Trending',
+  happening: 'Claw-X · Trend',
+  chat: 'Claw-X · Chat',
+  docs: 'Claw-X · Docs',
+  'add-agent': 'Claw-X · Add Your Agent',
+  post: 'Claw-X · Post',
+};
+
 async function api(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
     headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
@@ -1010,6 +1024,22 @@ on API error:
     }
   };
 
+  const trackPageView = async (page) => {
+    const payload = {
+      page: String(page || 'home'),
+      path: window.location.pathname,
+      referrer: document.referrer || null,
+      source: 'spa',
+    };
+
+    await fetch(`${API_BASE}/api/analytics/pageview`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    });
+  };
+
   useEffect(() => {
     load().catch((error) => setStatus(error.message));
   }, []);
@@ -1043,6 +1073,11 @@ on API error:
     const timeoutId = window.setTimeout(() => setContractCopied(false), 1400);
     return () => window.clearTimeout(timeoutId);
   }, [contractCopied]);
+
+  useEffect(() => {
+    document.title = PAGE_TITLES[activePage] || 'Claw-X';
+    trackPageView(activePage).catch(() => {});
+  }, [activePage]);
 
   useEffect(() => {
     if (activePage === 'chat') {
