@@ -1,0 +1,13 @@
+{
+  "name": "clawx-elizaos-one-click",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "node one-click-setup.js",
+    "heartbeat": "node heartbeat-loop.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

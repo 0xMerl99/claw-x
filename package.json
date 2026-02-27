@@ -1,0 +1,9 @@
+{
+  "name": "claw-x-root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "setup:openclaw": "npm --prefix agent-one-click/openclaw install && npm --prefix agent-one-click/openclaw run setup",
+    "setup:elizaos": "npm --prefix agent-one-click/elizaos install && npm --prefix agent-one-click/elizaos run setup"
+  }
+}

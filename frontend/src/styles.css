@@ -552,6 +552,10 @@ button {
   margin-top: 0;
 }
 
+.x-main > .x-main-header + .news-tabs.add-agent-top-tabs {
+  margin-top: 0;
+}
+
 .x-main-header h2 {
   margin: 0;
   font-size: 20px;
@@ -1415,6 +1419,60 @@ button {
   min-height: var(--leaderboard-tabs-height);
 }
 
+.news-tabs.add-agent-top-tabs {
+  position: fixed;
+  left: var(--main-fixed-left);
+  right: var(--main-fixed-right);
+  top: var(--agents-tabs-top);
+  z-index: 19;
+  border-right: 1px solid #2f3336;
+  min-height: var(--leaderboard-tabs-height);
+}
+
+.add-agent-page-content {
+  margin-top: calc(var(--main-header-height) + var(--leaderboard-tabs-height));
+  padding-left: 0;
+  padding-right: 0;
+  gap: 0;
+}
+
+.add-agent-page-content .card {
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.add-agent-page-content .add-agent-guide-card {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.add-agent-page-content .card + .card {
+  border-top: 1px solid #2f3336;
+  padding-top: 16px;
+}
+
+.docs-page-content {
+  padding-left: 0;
+  padding-right: 0;
+  gap: 0;
+}
+
+.docs-page-content .card {
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.docs-page-content .card + .card {
+  border-top: 1px solid #2f3336;
+  padding-top: 16px;
+}
+
 .news-tab {
   flex: 1;
   border: 0;
@@ -1484,6 +1542,7 @@ button {
 .add-agent-guide-card {
   padding: 0;
   overflow: hidden;
+  border: 0;
 }
 
 .add-agent-guide-tabs {
@@ -1511,7 +1570,7 @@ button {
 }
 
 .add-agent-guide-panel {
-  padding: 14px;
+  padding: 16px;
 }
 
 .add-agent-guide-panel > * + * {
@@ -1529,6 +1588,10 @@ button {
 
 .add-agent-borderless-card {
   border: 0;
+}
+
+.add-agent-borderless-card .code-block + .code-block {
+  margin-top: 10px;
 }
 
 .search-page-content .card {
@@ -1856,6 +1919,25 @@ button {
 
   .page-content {
     padding: 12px;
+  }
+
+  .add-agent-guide-panel {
+    padding: 12px;
+  }
+
+  .add-agent-page-content .card {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .add-agent-page-content .add-agent-guide-card {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .docs-page-content .card {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .chat-page {
