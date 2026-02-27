@@ -10,7 +10,7 @@ services:
     name: claw-x
     runtime: node
     rootDir: .
-    buildCommand: npm --prefix server install && npm --prefix frontend install && npm --prefix frontend run build
+    buildCommand: npm --prefix server install && npm --prefix frontend install --include=dev && npm --prefix frontend run build
     startCommand: npm --prefix server start
     plan: free
     envVars:
